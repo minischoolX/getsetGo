@@ -31,8 +31,6 @@ public class MainActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    SharedPreferences sharedPreferences = getSharedPreferences("getsetGo", MainActivity.this.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPreferences.edit();
     mWebView = findViewById(R.id.activity_main_webview);
     WebSettings webSettings = mWebView.getSettings();
     webSettings.setJavaScriptEnabled(true);
@@ -93,6 +91,10 @@ public class MainActivity extends Activity {
 }
 
   private class JavaScriptInterface {
+
+  SharedPreferences sharedPreferences = getSharedPreferences("getsetGo", MainActivity.this.MODE_PRIVATE);
+  SharedPreferences.Editor editor = sharedPreferences.edit();
+
     @JavascriptInterface
     public String GMX_getValue(String key, String value) {
 	String v = valueStore.getValue(key);
