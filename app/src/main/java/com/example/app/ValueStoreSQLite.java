@@ -49,6 +49,7 @@ private ValueDbHelper dbHelper;
 
     private static final String DB = "valuestore";
 
+    private static final String VALUE_STORE = "valuestore";
     private static final String CREATE_VALUE_STORE =
       "CREATE TABLE " + VALUE_STORE +
          "(" +
