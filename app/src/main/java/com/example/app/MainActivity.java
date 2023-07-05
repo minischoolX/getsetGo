@@ -93,6 +93,12 @@ public class MainActivity extends Activity {
     public void GM_openInWindow(String url) {
       mWebView.loadUrl(url);
     }
+
+    @JavascriptInterface
+    public void Toast(String toastString) {
+      Toast.makeText(MainActivity.this, toastString, Toast.LENGTH_SHORT).show();
+    }
+	  
   }
 
   @Override
