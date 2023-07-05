@@ -54,7 +54,8 @@ try {
 } catch (JSONException e) {
     e.printStackTrace();
 }
-		mWebView.evaluateJavascript("javascript:Android.GM_setValue('demoKey'," + jsonObjectDemo.toString() +");", null);
+		String stringifiedJson = jsonObjectDemo.toString();
+		mWebView.evaluateJavascript("javascript:Android.GM_setValue('demoKey'," + stringifiedJson +");", null);
 		mWebView.evaluateJavascript("javascript:Android.GM_getValue('demoKey');", null);
 		mWebView.evaluateJavascript("javascript:Android.GM_registerMenuCommand('caption', 'www.google.com');", null);
 		mWebView.evaluateJavascript("javascript:Android.GM_openInWindow('https://raingart.github.io/options.html');", null);
