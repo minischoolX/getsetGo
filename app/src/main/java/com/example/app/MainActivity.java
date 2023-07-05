@@ -52,14 +52,14 @@ public class MainActivity extends Activity {
         }
 	if (jsonObjectDemo != null) {
 	  String stringifiedJson = jsonObjectDemo.toString();
-	  Toast.makeText(MainActivity.this, "StringifiedJson: \n" + stringifiedJson, Toast.LENGTH_LONG).show();	
+//	  Toast.makeText(MainActivity.this, "StringifiedJson: \n" + stringifiedJson, Toast.LENGTH_LONG).show();	
 	} else {
-	  Toast.makeText(MainActivity.this, "jsonObjectDemo itself is null", Toast.LENGTH_LONG).show();	
+//	  Toast.makeText(MainActivity.this, "jsonObjectDemo itself is null", Toast.LENGTH_LONG).show();	
 	}
-//		String setter = "Android.GM_setValue('demoKey'," + stringifiedJson + ");";
-//	mWebView.evaluateJavascript("javascript:\n" + setter , null);
-//		String getter = "Android.GM_getValue('demoKey');";
-//	mWebView.evaluateJavascript("javascript:\n" + getter , null);
+	String setter = "Android.GM_setValue('demoKey'," + stringifiedJson + ");";
+	mWebView.evaluateJavascript("javascript:\n" + setter , null);
+	String getter = "Android.GM_getValue('demoKey');";
+	mWebView.evaluateJavascript("javascript:\n" + getter , null);
 	mWebView.evaluateJavascript("javascript:Android.GM_registerMenuCommand('caption', 'www.google.com');", null);
 	mWebView.evaluateJavascript("javascript:Android.GM_openInWindow('https://raingart.github.io/options.html');", null);
         // Inject JavaScript code from the assets folder
@@ -111,33 +111,24 @@ public class MainActivity extends Activity {
 
     @JavascriptInterface
     public String GM_getValue(String key) {
-      String jsonString = sharedPreferences.getString(key, null);
-      JSONObject jsonObject = null;
-      try {
-        if (jsonString != null) {
-            jsonObject = new JSONObject(jsonString);
-        }
-      } catch (JSONException e) {
-        e.printStackTrace();
-      }
-//	    if (jsonObject != null) {
-//		Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
+      String value = sharedPreferences.getString(key, null);
+//	    if (value != null) {
+//		Toast.makeText(MainActivity.this, value, Toast.LENGTH_SHORT).show();
 //	    } else {
-//	        Toast.makeText(MainActivity.this, "jsonObject is null", Toast.LENGTH_SHORT).show();
+//	        Toast.makeText(MainActivity.this, "value is null for GM_getValue", Toast.LENGTH_SHORT).show();
 //	    }
-      return jsonObject.toString();
+      return value;
     }
 
     @JavascriptInterface
     public void GM_setValue(String key, String value) {
       editor.putString(key, value);
       editor.apply();
-	    if (value != null) {
-		Toast.makeText(MainActivity.this, "executing GM_setValue with :" + "\n" + "Key : " + key + "\n" + "value :" + "\n" + value, Toast.LENGTH_SHORT).show();
-	    } else {
-	        Toast.makeText(MainActivity.this, "GM_setValue is failure", Toast.LENGTH_SHORT).show();
-	    }
-      
+	if (value != null) {
+	  Toast.makeText(MainActivity.this, "executing GM_setValue with :" + "\n" + "Key : " + key + "\n" + "value :" + "\n" + value, Toast.LENGTH_SHORT).show();
+	} else {
+	  Toast.makeText(MainActivity.this, "GM_setValue is failure", Toast.LENGTH_SHORT).show();
+	}      
     }
         
     @JavascriptInterface
