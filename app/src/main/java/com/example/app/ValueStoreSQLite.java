@@ -49,7 +49,7 @@ private ValueDbHelper dbHelper;
 
     private static final String DB = "valuestore";
 
-    private static final String CREATE_VALUE_STORE_TABLE =
+    private static final String CREATE_VALUE_STORE =
       "CREATE TABLE " + VALUE_STORE +
          "(" +
          COLUMN_KEY + " TEXT PRIMARY KEY," +
@@ -66,7 +66,7 @@ private ValueDbHelper dbHelper;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-      db.execSQL(CREATE_VALUE_STORE_TABLE);
+      db.execSQL(CREATE_VALUE_STORE);
     }
 
     @Override
