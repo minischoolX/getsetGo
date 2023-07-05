@@ -1,4 +1,4 @@
-// @grant           unsafeWindow 
+Android.Toast("atleast jsInterface is working");
 window.nova_plugins = [];
 window.nova_plugins.push({
    id: 'square-avatars',
@@ -294,18 +294,18 @@ for (const oldKey in user_settings) {
       delete Object.assign(user_settings, { [newKey]: user_settings[oldKey] })[oldKey];
    }
    window.Android.GM_setValue(configStoreName, user_settings);
-   window.Android.Toast(user_settings)
+   window.Android.Toast(user_settings);
 }
 registerMenuCommand();
 if (location.hostname === new URL(configPage).hostname) setupConfigPage();
 else {
    if (!user_settings?.disable_setting_button) insertSettingButton();
-   window.Android.Toast('checking for user_setting or confirmationStage')
+   window.Android.Toast('checking for user_setting or confirmationStage');
    if (!user_settings || !Object.keys(user_settings).length) {
       if (confirm('Active plugins undetected. Open the settings page now?')) window.Android.GM_openInWindow(configPage);
       user_settings['report_issues'] = 'on';
       window.Android.GM_setValue(configStoreName, user_settings);
-      window.Android.Toast('confirmationStage called without confirm')
+      window.Android.Toast('confirmationStage called without confirm');
    }
    else landerPlugins();
 }
