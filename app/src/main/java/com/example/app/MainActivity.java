@@ -26,16 +26,13 @@ public class MainActivity extends Activity {
   private WebView mWebView;
   private ValueStore valueStore;
 
-  private SharedPreferences sharedPreferences;
-  private SharedPreferences.Editor editor;
-
   @Override
   @SuppressLint("SetJavaScriptEnabled")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-	  sharedPreferences = getSharedPreferences("getsetGo", MainActivity.this.MODE_PRIVATE);
-	  editor = sharedPreferences.edit();
+    SharedPreferences sharedPreferences = getSharedPreferences("getsetGo", MainActivity.this.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPreferences.edit();
     mWebView = findViewById(R.id.activity_main_webview);
     WebSettings webSettings = mWebView.getSettings();
     webSettings.setJavaScriptEnabled(true);
@@ -46,19 +43,22 @@ public class MainActivity extends Activity {
         super.onPageStarted(view, url, favicon);
         if (url.matches("^(https?://(www|m)\\.youtube\\.com/.*)|(https?://.*\\.youtube-nocookie\\.com/embed/.*)|(https?://youtube\\.googleapis\\.com/embed/.*)|(https?://raingart\\.github\\.io/options\\.html.*)$") &&
           !url.matches("^(https?://.*\\.youtube\\.com/.*\\.xml.*)|(https?://.*\\.youtube\\.com/error.*)|(https?://music\\.youtube\\.com/.*)|(https?://accounts\\.youtube\\.com/.*)|(https?://studio\\.youtube\\.com/.*)|(https?://.*\\.youtube\\.com/redirect\\?.*)$")) {
-		JSONObject jsonObjectDemo = new JSONObject();
-try {
-    jsonObjectDemo.put("name", "John Doe");
-    jsonObjectDemo.put("age", 25);
-    jsonObjectDemo.put("email", "johndoe@example.com");
-} catch (JSONException e) {
-    e.printStackTrace();
-}
-		String stringifiedJson = jsonObjectDemo.toString();
-		mWebView.evaluateJavascript("javascript:Android.GM_setValue('demoKey'," + stringifiedJson +");", null);
-		mWebView.evaluateJavascript("javascript:Android.GM_getValue('demoKey');", null);
-		mWebView.evaluateJavascript("javascript:Android.GM_registerMenuCommand('caption', 'www.google.com');", null);
-		mWebView.evaluateJavascript("javascript:Android.GM_openInWindow('https://raingart.github.io/options.html');", null);
+
+	JSONObject jsonObjectDemo = new JSONObject();
+        try {
+            jsonObjectDemo.put("name", "John Doe");
+            jsonObjectDemo.put("age", 25);
+            jsonObjectDemo.put("email", "johndoe@example.com");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+	String stringifiedJson = jsonObjectDemo.toString();
+		String setter = "Android.GM_setValue('demoKey'," + stringifiedJson + ");";
+	mWebView.evaluateJavascript("javascript:\n" + setter , null);
+		String getter = "Android.GM_getValue('demoKey');";
+	mWebView.evaluateJavascript("javascript:\n" + getter , null);
+	mWebView.evaluateJavascript("javascript:Android.GM_registerMenuCommand('caption', 'www.google.com');", null);
+	mWebView.evaluateJavascript("javascript:Android.GM_openInWindow('https://raingart.github.io/options.html');", null);
         // Inject JavaScript code from the assets folder
           try {
             InputStream inputStream = getAssets().open("script.js");
@@ -113,11 +113,11 @@ try {
       } catch (JSONException e) {
         e.printStackTrace();
       }
-//	    if (jsonObject != null) {
-//		Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
-//	    } else {
-//	        Toast.makeText(MainActivity.this, "jsonObject is null", Toast.LENGTH_SHORT).show();
-//	    }
+	    if (jsonObject != null) {
+		Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
+	    } else {
+	        Toast.makeText(MainActivity.this, "jsonObject is null", Toast.LENGTH_SHORT).show();
+	    }
       return jsonObject.toString();
     }
 
