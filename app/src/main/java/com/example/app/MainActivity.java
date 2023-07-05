@@ -46,11 +46,11 @@ public class MainActivity extends Activity {
             inputStream.close();
             String script = new String(buffer);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
               view.evaluateJavascript(script, null);
-            } else {
-              view.loadUrl("javascript:\n" + script);
-            }
+//            } else {
+//              view.loadUrl("javascript:\n" + script);
+//            }
 //            view.evaluateJavascript(script, null);
             Toast.makeText(MainActivity.this, "javascript injected: " + url, Toast.LENGTH_SHORT).show();
 
