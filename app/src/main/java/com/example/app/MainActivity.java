@@ -25,16 +25,18 @@ import org.json.JSONObject;
 public class MainActivity extends Activity {
   private WebView mWebView;
   private ValueStore valueStore;
-	
+
+  private SharedPreferences sharedPreferences;
+  private SharedPreferences.Editor editor;
+
   @Override
   @SuppressLint("SetJavaScriptEnabled")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+	  sharedPreferences = getSharedPreferences("getsetGo", Context.MODE_PRIVATE);
+	  editor = sharedPreferences.edit();
     mWebView = findViewById(R.id.activity_main_webview);
-
-    SharedPreferences sharedPreferences = getSharedPreferences("getsetGo", Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPreferences.edit();
     WebSettings webSettings = mWebView.getSettings();
     webSettings.setJavaScriptEnabled(true);
     //mWebView.setWebViewClient(new getsetGoClient());
