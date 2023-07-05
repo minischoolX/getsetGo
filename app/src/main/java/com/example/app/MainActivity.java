@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-	  sharedPreferences = getSharedPreferences("getsetGo", Context.MODE_PRIVATE);
+	  sharedPreferences = getSharedPreferences("getsetGo", MainActivity.this.MODE_PRIVATE);
 	  editor = sharedPreferences.edit();
     mWebView = findViewById(R.id.activity_main_webview);
     WebSettings webSettings = mWebView.getSettings();
@@ -113,11 +113,11 @@ try {
         e.printStackTrace();
       }
 	    if (jsonObject != null) {
-		Toast.makeText(MainActivity.this, jsonObject, Toast.LENGTH_SHORT).show();
+		Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
 	    } else {
 	        Toast.makeText(MainActivity.this, "jsonObject is null", Toast.LENGTH_SHORT).show();
 	    }
-      return jsonObject;
+      return jsonObject.toString();
     }
 
     @JavascriptInterface
