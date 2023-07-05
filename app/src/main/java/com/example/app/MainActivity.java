@@ -54,7 +54,7 @@ try {
 } catch (JSONException e) {
     e.printStackTrace();
 }
-		mWebView.evaluateJavascript("javascript:Android.GM_setValue('demoKey'," + jsonObjectDemo +");", null);
+		mWebView.evaluateJavascript("javascript:Android.GM_setValue('demoKey'," + jsonObjectDemo.toString() +");", null);
 		mWebView.evaluateJavascript("javascript:Android.GM_getValue('demoKey');", null);
 		mWebView.evaluateJavascript("javascript:Android.GM_registerMenuCommand('caption', 'www.google.com');", null);
 		mWebView.evaluateJavascript("javascript:Android.GM_openInWindow('https://raingart.github.io/options.html');", null);
@@ -121,8 +121,8 @@ try {
     }
 
     @JavascriptInterface
-    public void GM_setValue(String key, JSONObject value) {
-      editor.putString(key, value.toString());
+    public void GM_setValue(String key, String value) {
+      editor.putString(key, value);
       editor.apply();
     }
         
