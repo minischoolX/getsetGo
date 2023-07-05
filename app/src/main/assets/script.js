@@ -195,8 +195,8 @@ const NOVA = {
 
 const Plugins = {
    run: ({ user_settings, app_ver }) => {
-      if (!window.nova_plugins?.length) return console.error('nova_plugins empty', window.nova_plugins);
-      if (!user_settings) return console.error('user_settings empty', user_settings);
+      if (!window.nova_plugins?.length) return window.Android.Toast('nova_plugins empty');
+      if (!user_settings) return window.Android.Toast('user_settings empty');
       NOVA.currentPage = (function () {
          const pathnameArray = location.pathname.split('/').filter(Boolean);
          const [page, channelTab] = [pathnameArray[0], pathnameArray.pop()];
@@ -276,15 +276,15 @@ const Plugins = {
       }
    },
 }
-//console.log('%c /• %s •/', 'color:#0096fa; font-weight:bold;', GM_info.script.name + ' v.' + GM_info.script.version);
+window.Android.Toast('%c /• %s •/');
 const
    configPage = 'https://raingart.github.io/options.html',
    configStoreName = 'user_settings',
    user_settings = window.Android.GM_getValue(configStoreName, null);
 if (user_settings?.exclude_iframe && (window.frameElement || window.self !== window.top)) {
-   return console.warn('GM info script name' + ': processed in the iframe disable');
+   return window.Android.Toast('GM info script name' + ': processed in the iframe disable');
 }
-console.debug(`current ${configStoreName}:`, user_settings);
+//console.debug(`current ${configStoreName}:`, user_settings);
 const keyRenameTemplate = {
    'shorts_thumbnails_time': 'shorts-thumbnails-time',
 }
@@ -294,15 +294,18 @@ for (const oldKey in user_settings) {
       delete Object.assign(user_settings, { [newKey]: user_settings[oldKey] })[oldKey];
    }
    window.Android.GM_setValue(configStoreName, user_settings);
+   window.Android.Toast(user_settings)
 }
 registerMenuCommand();
 if (location.hostname === new URL(configPage).hostname) setupConfigPage();
 else {
    if (!user_settings?.disable_setting_button) insertSettingButton();
+   window.Android.Toast('checking for user_setting or confirmationStage')
    if (!user_settings || !Object.keys(user_settings).length) {
       if (confirm('Active plugins undetected. Open the settings page now?')) window.Android.GM_openInWindow(configPage);
       user_settings['report_issues'] = 'on';
       window.Android.GM_setValue(configStoreName, user_settings);
+      window.Android.Toast('confirmationStage called without confirm')
    }
    else landerPlugins();
 }
