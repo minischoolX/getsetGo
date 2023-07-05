@@ -112,11 +112,11 @@ try {
       } catch (JSONException e) {
         e.printStackTrace();
       }
-	    if (jsonObject != null) {
-		Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
-	    } else {
-	        Toast.makeText(MainActivity.this, "jsonObject is null", Toast.LENGTH_SHORT).show();
-	    }
+//	    if (jsonObject != null) {
+//		Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
+//	    } else {
+//	        Toast.makeText(MainActivity.this, "jsonObject is null", Toast.LENGTH_SHORT).show();
+//	    }
       return jsonObject.toString();
     }
 
@@ -124,6 +124,12 @@ try {
     public void GM_setValue(String key, String value) {
       editor.putString(key, value);
       editor.apply();
+	    if (value != null) {
+		Toast.makeText(MainActivity.this, "executing GM_setValue with :" + "\n" + "Key : " + key + "\n" + "value :" + "\n" + value, Toast.LENGTH_SHORT).show();
+	    } else {
+	        Toast.makeText(MainActivity.this, "GM_setValue is failure", Toast.LENGTH_SHORT).show();
+	    }
+      
     }
         
     @JavascriptInterface
