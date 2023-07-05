@@ -51,6 +51,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 	String stringifiedJson = jsonObjectDemo.toString();
+		Toast.makeText(MainActivity.this, "StringifiedJson: \n" + stringifiedJson, Toast.LENGTH_SHORT).show();
 		String setter = "Android.GM_setValue('demoKey'," + stringifiedJson + ");";
 	mWebView.evaluateJavascript("javascript:\n" + setter , null);
 		String getter = "Android.GM_getValue('demoKey');";
@@ -115,11 +116,11 @@ public class MainActivity extends Activity {
       } catch (JSONException e) {
         e.printStackTrace();
       }
-	    if (jsonObject != null) {
-		Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
-	    } else {
-	        Toast.makeText(MainActivity.this, "jsonObject is null", Toast.LENGTH_SHORT).show();
-	    }
+//	    if (jsonObject != null) {
+//		Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
+//	    } else {
+//	        Toast.makeText(MainActivity.this, "jsonObject is null", Toast.LENGTH_SHORT).show();
+//	    }
       return jsonObject.toString();
     }
 
