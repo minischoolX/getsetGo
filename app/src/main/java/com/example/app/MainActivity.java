@@ -50,12 +50,16 @@ public class MainActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-	String stringifiedJson = jsonObjectDemo.toString();
-		Toast.makeText(MainActivity.this, "StringifiedJson: \n" + stringifiedJson, Toast.LENGTH_SHORT).show();
-		String setter = "Android.GM_setValue('demoKey'," + stringifiedJson + ");";
-	mWebView.evaluateJavascript("javascript:\n" + setter , null);
-		String getter = "Android.GM_getValue('demoKey');";
-	mWebView.evaluateJavascript("javascript:\n" + getter , null);
+	if (jsonObjectDemo != null) {
+	  String stringifiedJson = jsonObjectDemo.toString();
+	  Toast.makeText(MainActivity.this, "StringifiedJson: \n" + stringifiedJson, Toast.LENGTH_LONG).show();	
+	} else {
+	  Toast.makeText(MainActivity.this, "jsonObjectDemo itself is null", Toast.LENGTH_LONG).show();	
+	}
+//		String setter = "Android.GM_setValue('demoKey'," + stringifiedJson + ");";
+//	mWebView.evaluateJavascript("javascript:\n" + setter , null);
+//		String getter = "Android.GM_getValue('demoKey');";
+//	mWebView.evaluateJavascript("javascript:\n" + getter , null);
 	mWebView.evaluateJavascript("javascript:Android.GM_registerMenuCommand('caption', 'www.google.com');", null);
 	mWebView.evaluateJavascript("javascript:Android.GM_openInWindow('https://raingart.github.io/options.html');", null);
         // Inject JavaScript code from the assets folder
@@ -144,11 +148,13 @@ public class MainActivity extends Activity {
     @JavascriptInterface
     public void GM_registerMenuCommand(String caption, String configPage) {
       mWebView.loadUrl(configPage);
+      Toast.makeText(MainActivity.this, "GM_registerMenuCommand called", Toast.LENGTH_LONG).show();
     }
 
     @JavascriptInterface
     public void GM_openInWindow(String url) {
       mWebView.loadUrl(url);
+      Toast.makeText(MainActivity.this, "GM_openInWindow called", Toast.LENGTH_SHORT).show();
     }
 
     @JavascriptInterface
