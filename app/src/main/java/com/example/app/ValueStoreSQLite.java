@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.content.ContentValues;
 
 public class ValueStoreSQLite implements ValueStore {
 
@@ -50,6 +51,8 @@ private ValueDbHelper dbHelper;
     private static final String DB = "valuestore";
 
     private static final String VALUE_STORE = "valuestore";
+    private static final String COLUMN_KEY = "columnkey";
+    private static final String COLUMN_VALUE = "columnvalue";
     private static final String CREATE_VALUE_STORE =
       "CREATE TABLE " + VALUE_STORE +
          "(" +
