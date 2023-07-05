@@ -18,7 +18,7 @@ import java.io.InputStream;
 import android.widget.Toast;
 
 import android.content.SharedPreferences;
-
+import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,7 +51,10 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 //	if (jsonObjectDemo != null) {
-	  String stringifiedJson = jsonObjectDemo.toString();
+//	  String stringifiedJson = jsonObjectDemo.toString();
+		Gson gson = new Gson();
+		String stringifiedJson = gson.toJson(jsonObjectDemo);
+		
 //	  Toast.makeText(MainActivity.this, "StringifiedJson: \n" + stringifiedJson, Toast.LENGTH_LONG).show();	
 //	} else {
 //	  Toast.makeText(MainActivity.this, "jsonObjectDemo itself is null", Toast.LENGTH_LONG).show();	
