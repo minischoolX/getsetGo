@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
 //            } else {
 //              view.loadUrl("javascript:\n" + script);
 //            }
-//            view.evaluateJavascript(script, null);
+//            mWebView.evaluateJavascript(script, null);
             Toast.makeText(MainActivity.this, "javascript injected: " + url, Toast.LENGTH_SHORT).show();
 
           } catch (IOException e) {
