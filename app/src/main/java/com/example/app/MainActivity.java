@@ -110,6 +110,11 @@ try {
       } catch (JSONException e) {
         e.printStackTrace();
       }
+	    if (jsonObject != null) {
+		Toast.makeText(MainActivity.this, jsonObject, Toast.LENGTH_SHORT).show();
+	    } else {
+	        Toast.makeText(MainActivity.this, "jsonObject is null", Toast.LENGTH_SHORT).show();
+	    }
       return jsonObject;
     }
 
@@ -122,7 +127,7 @@ try {
     @JavascriptInterface
     public void GMX_setValue(String key, String value) {
 	  valueStore.setValue(key, value);
-	}
+    }
         
     @JavascriptInterface
     public void GM_registerMenuCommand(String caption, String configPage) {
