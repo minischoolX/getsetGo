@@ -15,7 +15,7 @@ private ValueDbHelper dbHelper;
     if (dbHelper == null) {
       return null;
     }
-    return dbHelper.selectValue(key);
+    return dbHelper.getter(key);
   }
 
   @Override
@@ -23,7 +23,7 @@ private ValueDbHelper dbHelper;
     if (dbHelper == null) {
       return;
     }
-    dbHelper.updateOrInsertValue(key, value);
+    dbHelper.setter(key, value);
   }
 
   public ValueStoreSQLite(Context context) {
@@ -74,7 +74,7 @@ private ValueDbHelper dbHelper;
         // Handle database upgrades if needed
     }
     
-    public String selectValue(String key) {
+    public String getter(String key) {
       String[] columns = {COLUMN_VALUE};
       String selection = COLUMN_KEY + "=?";
       String[] selectionArgs = {key};
@@ -87,7 +87,7 @@ private ValueDbHelper dbHelper;
       return value;
     }
 
-    public void updateOrInsertValue(String key, String value) {
+    public void setter(String key, String value) {
       String selection = COLUMN_KEY + "=?";
       String[] selectionArgs = {key};
       ContentValues fields = new ContentValues();
