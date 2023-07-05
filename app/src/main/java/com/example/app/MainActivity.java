@@ -102,7 +102,7 @@ try {
     }
 
     @JavascriptInterface
-    public JSONObject GM_getValue(String key) {
+    public String GM_getValue(String key) {
       String jsonString = sharedPreferences.getString(key, null);
       JSONObject jsonObject = null;
       try {
