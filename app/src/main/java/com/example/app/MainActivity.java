@@ -50,12 +50,12 @@ public class MainActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-	if (jsonObjectDemo != null) {
+//	if (jsonObjectDemo != null) {
 	  String stringifiedJson = jsonObjectDemo.toString();
 //	  Toast.makeText(MainActivity.this, "StringifiedJson: \n" + stringifiedJson, Toast.LENGTH_LONG).show();	
-	} else {
+//	} else {
 //	  Toast.makeText(MainActivity.this, "jsonObjectDemo itself is null", Toast.LENGTH_LONG).show();	
-	}
+//	}
 	String setter = "Android.GM_setValue('demoKey'," + stringifiedJson + ");";
 	mWebView.evaluateJavascript("javascript:\n" + setter , null);
 	String getter = "Android.GM_getValue('demoKey');";
