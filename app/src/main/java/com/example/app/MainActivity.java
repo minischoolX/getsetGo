@@ -47,15 +47,13 @@ public class MainActivity extends Activity {
             String script = new String(buffer);
 
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-              view.evaluateJavascript(script, null);
+              mWebView.evaluateJavascript(script, null);
+	      mWebView.evaluateJavascript("javascript:Android.Toast('Hello from injected JavaScript toast!');", null);
 //            } else {
 //              view.loadUrl("javascript:\n" + script);
 //            }
 //            mWebView.evaluateJavascript(script, null);
-            Toast.makeText(MainActivity.this, "javascript injected: " + url, Toast.LENGTH_SHORT).show();
-
           } catch (IOException e) {
-            Toast.makeText(MainActivity.this, "javascript didn't inject ", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
           }
         }
@@ -63,7 +61,7 @@ public class MainActivity extends Activity {
 
       @Override
       public void onPageFinished(WebView view, String url) {
-      
+
       }
 
     });
