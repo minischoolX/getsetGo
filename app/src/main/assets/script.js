@@ -1,4 +1,4 @@
-Android.Toast("atleast jsInterface is working");
+window.Android.Toast("atleast jsInterface is working");
 window.nova_plugins = [];
 window.nova_plugins.push({
    id: 'square-avatars',
@@ -195,8 +195,8 @@ const NOVA = {
 
 const Plugins = {
    run: ({ user_settings, app_ver }) => {
-      if (!window.nova_plugins?.length) return window.Android.Toast('nova_plugins empty');
-      if (!user_settings) return window.Android.Toast('user_settings empty');
+      if (!window.nova_plugins?.length) return;
+      if (!user_settings) return;
       NOVA.currentPage = (function () {
          const pathnameArray = location.pathname.split('/').filter(Boolean);
          const [page, channelTab] = [pathnameArray[0], pathnameArray.pop()];
@@ -300,10 +300,10 @@ registerMenuCommand();
 if (location.hostname === new URL(configPage).hostname) setupConfigPage();
 else {
    if (!user_settings?.disable_setting_button) insertSettingButton();
-   window.Android.Toast('checking for user_setting or confirmationStage');
    if (!user_settings || !Object.keys(user_settings).length) {
-      if (confirm('Active plugins undetected. Open the settings page now?')) window.Android.GM_openInWindow(configPage);
-      user_settings['report_issues'] = 'on';
+      window.Android.GM_openInWindow(configPage);
+      //if (confirm('Active plugins undetected. Open the settings page now?')) window.Android.GM_openInWindow(configPage);
+      //user_settings['report_issues'] = 'on';
       window.Android.GM_setValue(configStoreName, user_settings);
       window.Android.Toast('confirmationStage called without confirm');
    }
